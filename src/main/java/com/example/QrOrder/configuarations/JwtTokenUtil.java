@@ -1,7 +1,4 @@
 package com.example.QrOrder.configuarations;
-
-import com.example.QrOrder.models.User;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;

@@ -1,10 +1,13 @@
 package com.example.QrOrder.controller;
 
+import com.example.QrOrder.dtos.MenuItemDTO;
 import com.example.QrOrder.models.MenuItem;
 import com.example.QrOrder.service.MenuItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -13,10 +16,10 @@ import java.util.List;
 public class MenuController {
 
     private MenuItemService menuService;
+
     @GetMapping
     public ResponseEntity<List<MenuItem>> getAllMenuItems() throws Exception {
-            System.out.println("getAllMenuItems");  // Log số 1 ra console
-       return ResponseEntity.ok(menuService.getAllMenuItems());
+        return ResponseEntity.ok(menuService.getAllMenuItems());
     }
 
     @GetMapping("/{id}")
@@ -27,10 +30,9 @@ public class MenuController {
 
     @PostMapping
     public ResponseEntity<MenuItem> addMenuItem(
-            @RequestBody MenuItem menuItem) throws Exception {
-        return ResponseEntity.ok(menuService.addMenuItem(menuItem));
+            @RequestBody MenuItemDTO menuItemDTO) throws Exception {
+        return ResponseEntity.ok(menuService.addMenuItem(menuItemDTO));
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<MenuItem> updateMenuItem(@PathVariable Long id,
@@ -38,11 +40,10 @@ public class MenuController {
         return ResponseEntity.ok(menuService.updateMenuItem(id, menuItem));
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMenuItem(@PathVariable Long id) throws Exception {
+    public ResponseEntity<String> deleteMenuItem(@PathVariable Long id) throws Exception {
         menuService.deleteMenuItem(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("ok"); //noContent().build();
     }
 
 }
