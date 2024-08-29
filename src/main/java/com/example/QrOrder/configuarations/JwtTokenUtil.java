@@ -25,11 +25,8 @@ public class JwtTokenUtil {
     private int expiration; //save to an environment variable
     @Value("${jwt.secretKey}")
     private String secretKey;
-
     public String generateToken(String gmail) throws Exception {
-        //properties => claims
         Map<String, Object> claims = new HashMap<>();
-        //   this.generateSecretKey();
         claims.put("phoneNumber", gmail);
         try {
             String token = Jwts.builder()   // tạo bẳng Builder Parttern
@@ -40,10 +37,8 @@ public class JwtTokenUtil {
                     //  .claim("scope", Role)
                     .compact();
             return token;
-        } catch (Exception e) {  // tạo ra token đôi khi nó có thể bị Exception
-            //you can "inject" Logger, instead System.out.println
+        } catch (Exception e) {
             throw new Exception("Cannot create JWT token, error: " + e.getMessage());
-            //return null;
         }
     }
     // chuyển đổi từ secret key sang đối tượng key

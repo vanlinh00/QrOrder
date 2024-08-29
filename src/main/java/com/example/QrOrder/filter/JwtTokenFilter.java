@@ -2,12 +2,6 @@ package com.example.QrOrder.filter;
 
 
 import com.example.QrOrder.configuarations.JwtTokenUtil;
-import com.example.QrOrder.models.User;
-import com.example.QrOrder.service.UserServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.util.Pair;
 
 import jakarta.servlet.FilterChain;
@@ -26,10 +20,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
-import java.security.cert.Extension;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,9 +30,10 @@ import java.util.List;
 public class JwtTokenFilter extends OncePerRequestFilter {
     // @Value("${api.prefix}")
     //private String apiPrefix;
-   // private final UserServiceImpl userService;
+    // private final UserServiceImpl userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;
+
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
@@ -83,7 +76,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private boolean isByPassToken(@NonNull HttpServletRequest request) {
         final List<Pair<String, String>> bypassTokens = Arrays.asList(
                 Pair.of(String.format("/%s/user/login", "qr_order/v1" /*apiPrefix*/), "POST"),
-                Pair.of(String.format("/%s/api/menu/**", "qr_order/v1" /*apiPrefix*/), "GET")
+                Pair.of(String.format("/%s/api/menu/**", "qr_order/v1" /*apiPrefix*/), "GET"),
+                Pair.of(String.format("/%s/api/qr-code/tables/**", "qr_order/v1" /*apiPrefix*/), "GET")
         );
         String requestPath = request.getServletPath();
         String requestMethod = request.getMethod();

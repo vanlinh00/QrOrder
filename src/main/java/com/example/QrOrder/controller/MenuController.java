@@ -36,7 +36,6 @@ public class MenuController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<MenuItem> updateMenuItem(@PathVariable Long id,
                                                    @RequestBody MenuItem menuItem) throws Exception {
         return ResponseEntity.ok(menuService.updateMenuItem(id, menuItem));
@@ -45,7 +44,7 @@ public class MenuController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMenuItem(@PathVariable Long id) throws Exception {
         menuService.deleteMenuItem(id);
-        return ResponseEntity.ok("ok"); //noContent().build();
+        return ResponseEntity.ok("ok");
     }
 
 }

@@ -28,14 +28,19 @@ public class WebSecurityConfig {
                     requests.requestMatchers(
                                     String.format("qr_order/v1/user/**"),
                                     String.format("qr_order/v1/api/orders/**")
-                                    //  String.format("qr_order/v1/api/menu/**")
                             )
                             .permitAll()
+
                             .requestMatchers(GET, String.format("qr_order/v1/api/menu/**")).permitAll()
                             .requestMatchers(POST, String.format("qr_order/v1/api/menu/**")).hasRole(Role.ADMIN)
                             .requestMatchers(PUT, String.format("qr_order/v1/api/menu/**")).hasRole(Role.ADMIN)
                             .requestMatchers(DELETE, String.format("qr_order/v1/api/menu/**")).hasRole(Role.ADMIN)
+
+                            .requestMatchers(GET, String.format("qr_order/v1/api/qr-code/**")).permitAll()
+                            .requestMatchers(DELETE, String.format("qr_order/v1/api/qr-code/**")).hasRole(Role.ADMIN)
+                            .requestMatchers(POST, String.format("qr_order/v1/api/qr-code/generate/**")).hasRole(Role.ADMIN)
                             .anyRequest().authenticated();
+
                 });
         return http.build();
     }

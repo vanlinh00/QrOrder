@@ -13,24 +13,23 @@ import java.util.Optional;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    /*
     private OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
+    public ResponseEntity<Order> createOrder(@RequestBody Order order) throws Exception {
         Order newOrder = orderService.placeOrder(order);
         return ResponseEntity.ok(newOrder);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+    public ResponseEntity<Order> getOrderById(@PathVariable Long id) throws Exception {
         Optional<Order> order = orderService.getOrderById(id);
         return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders(@RequestParam(value = "status", required = false)
-                                                        Order.Status status) {
+                                                        Order.Status status) throws Exception {
         List<Order> orders;
         if (status != null) {
             orders = orderService.getOrdersByStatus(status);
@@ -42,15 +41,15 @@ public class OrderController {
 
     @PutMapping("/{id}/status")
     public ResponseEntity<Order> updateOrderStatus(@PathVariable Long id,
-                                                   @RequestBody Order.Status status) {
+                                                   @RequestBody Order.Status status) throws Exception {
         Optional<Order> updatedOrder = orderService.updateOrderStatus(id, status);
         return updatedOrder.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) throws Exception {
         orderService.deleteOrder(id);
         return ResponseEntity.noContent().build();
     }
-*/
+
 }

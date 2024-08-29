@@ -60,14 +60,4 @@ public class OrderService implements IOrderService {
     public void deleteOrder(Long id) throws Exception {
 
     }
-
-
-//    // Update order status
-//    public Optional<Order> updateOrderStatus(Long orderId, Order.Status status) {
-//    }
-//
-//    // Delete an order by ID
-//    public void deleteOrder(Long id) {
-//        orderRepository.deleteById(id);
-//    }
 }
