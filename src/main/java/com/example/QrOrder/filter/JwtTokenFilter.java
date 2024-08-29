@@ -7,6 +7,7 @@ import com.example.QrOrder.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.util.Pair;
 
 import jakarta.servlet.FilterChain;
@@ -33,13 +34,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
     // @Value("${api.prefix}")
     //private String apiPrefix;
-    private UserServiceImpl userService;
+   // private final UserServiceImpl userService;
     private final JwtTokenUtil jwtTokenUtil;
-
+    private final UserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
@@ -58,7 +59,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             final String token = authHeader.substring(7); // Bearer loai bo 7 ky tu dau tien di
             final String gmail = jwtTokenUtil.extractPhoneNumber(token);
             if (gmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userService.getUserByEmail(gmail);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(gmail);
                 if (jwtTokenUtil.validateToken(token, userDetails)) // nếu validateToken thành công thì là còn hạn
                 {
                     UsernamePasswordAuthenticationToken authenticationToken =

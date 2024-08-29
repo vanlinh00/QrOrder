@@ -1,4 +1,5 @@
 package com.example.QrOrder.configuarations;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -36,6 +37,7 @@ public class JwtTokenUtil {
                     .setSubject(gmail)//1000 đổi từ giây sang millis
                     .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000L))
                     .signWith(getSignInKey(), SignatureAlgorithm.HS256) // thuật toán mã hóa HS256
+                    //  .claim("scope", Role)
                     .compact();
             return token;
         } catch (Exception e) {  // tạo ra token đôi khi nó có thể bị Exception
@@ -44,7 +46,6 @@ public class JwtTokenUtil {
             //return null;
         }
     }
-
     // chuyển đổi từ secret key sang đối tượng key
     private Key getSignInKey() {
         byte[] bytes = Decoders.BASE64.decode(secretKey);

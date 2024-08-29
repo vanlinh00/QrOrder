@@ -2,10 +2,11 @@ package com.example.QrOrder.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenerationTime;
+
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "menu_items")
@@ -37,4 +38,14 @@ public class MenuItem {
 
     @Column(name = "updated_at")
     private Timestamp updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = Timestamp.valueOf(LocalDateTime.now());
+        updatedAt = Timestamp.valueOf(LocalDateTime.now());
+    }
+//    @PreUpdate
+//    protected void onUpdate(){
+//        updateAt=LocalDateTime.now();
+//    }
 }

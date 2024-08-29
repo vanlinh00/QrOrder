@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUserService {
+    String login(String gmail, String password) throws Exception;
+
     User saveUser(User user);
 
     Optional<User> getUserById(Integer id);
@@ -15,7 +17,7 @@ public interface IUserService {
 
     User getUserByEmail(String email);
 
-     List<User> getAllUsers();
+    List<User> getAllUsers();
 
     void deleteUserById(Integer id);
 }

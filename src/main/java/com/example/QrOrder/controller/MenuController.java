@@ -5,6 +5,7 @@ import com.example.QrOrder.models.MenuItem;
 import com.example.QrOrder.service.MenuItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -35,6 +36,7 @@ public class MenuController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<MenuItem> updateMenuItem(@PathVariable Long id,
                                                    @RequestBody MenuItem menuItem) throws Exception {
         return ResponseEntity.ok(menuService.updateMenuItem(id, menuItem));
