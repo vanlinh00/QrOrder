@@ -21,7 +21,7 @@ public class TableController {
     }
 
     @GetMapping("/tables/{id}")
-    public ResponseEntity<Tables> getTableById(@PathVariable Long id) {
+    public ResponseEntity<Tables> getTableById(@PathVariable Long id) throws Exception {
         return tableService.getTableById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

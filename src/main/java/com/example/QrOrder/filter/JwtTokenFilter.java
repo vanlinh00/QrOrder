@@ -77,7 +77,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         final List<Pair<String, String>> bypassTokens = Arrays.asList(
                 Pair.of(String.format("/%s/user/login", "qr_order/v1" /*apiPrefix*/), "POST"),
                 Pair.of(String.format("/%s/api/menu/**", "qr_order/v1" /*apiPrefix*/), "GET"),
-                Pair.of(String.format("/%s/api/qr-code/tables/**", "qr_order/v1" /*apiPrefix*/), "GET")
+                Pair.of(String.format("/%s/api/qr-code/tables/**", "qr_order/v1" /*apiPrefix*/), "GET"),
+                Pair.of(String.format("/%s/api/orders", "qr_order/v1" /*apiPrefix*/), "POST"),
+                Pair.of(String.format("/%s/api/orders/**", "qr_order/v1" /*apiPrefix*/), "PUT"),
+                Pair.of(String.format("/%s/api/orders/**", "qr_order/v1" /*apiPrefix*/), "GET"),
+                Pair.of(String.format("/%s/api/orders/status", "qr_order/v1" /*apiPrefix*/), "GET")
+
         );
         String requestPath = request.getServletPath();
         String requestMethod = request.getMethod();

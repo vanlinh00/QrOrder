@@ -44,8 +44,5 @@ public class MenuItem {
         createdAt = Timestamp.valueOf(LocalDateTime.now());
         updatedAt = Timestamp.valueOf(LocalDateTime.now());
     }
-//    @PreUpdate
-//    protected void onUpdate(){
-//        updateAt=LocalDateTime.now();
-//    }
+
 }

@@ -29,12 +29,11 @@ public class JwtTokenUtil {
         Map<String, Object> claims = new HashMap<>();
         claims.put("phoneNumber", gmail);
         try {
-            String token = Jwts.builder()   // tạo bẳng Builder Parttern
-                    .setClaims(claims) //how to extract claims from this ?
+            String token = Jwts.builder()
+                    .setClaims(claims)
                     .setSubject(gmail)//1000 đổi từ giây sang millis
                     .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000L))
                     .signWith(getSignInKey(), SignatureAlgorithm.HS256) // thuật toán mã hóa HS256
-                    //  .claim("scope", Role)
                     .compact();
             return token;
         } catch (Exception e) {

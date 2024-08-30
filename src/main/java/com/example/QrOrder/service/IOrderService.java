@@ -1,31 +1,26 @@
 package com.example.QrOrder.service;
 
+import com.example.QrOrder.dtos.OrderDTO;
+import com.example.QrOrder.dtos.StatusDTO;
 import com.example.QrOrder.models.Order;
+import com.example.QrOrder.models.OrderItem;
+import com.example.QrOrder.reponses.ListOrderResponse;
+import com.example.QrOrder.reponses.OrderResponse;
+import com.example.QrOrder.repository.OrderItemRepository;
+import com.example.QrOrder.repository.OrderRepository;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IOrderService {
+    void createOrder(Order order, List<OrderItem> orderItems);
 
-    // Create a new order
-    Order createOrder(Order order) throws Exception;
+    Order getOrderById(Long id);
 
-    // Get order by ID
-    Optional<Order> getOrderById(Long id) throws Exception;
+    void deleteOrder(Long orderId);
 
-    //    // Get all orders
-    List<Order> getAllOrders() throws Exception;
+    OrderResponse getOrderDtoById(Long id);
 
-    // Get orders by status
-    List<Order> getOrdersByStatus(Order.Status status) throws Exception;
-
-    // Create a new order
-    Order placeOrder(Order order) throws Exception;
-
-    // Update order status
-    Optional<Order> updateOrderStatus(Long orderId, Order.Status status) throws Exception;
-
-    // Delete an order by ID
-    void deleteOrder(Long id) throws Exception;
-
+    ListOrderResponse getOrdersByStatus(StatusDTO statusDTO);
 }

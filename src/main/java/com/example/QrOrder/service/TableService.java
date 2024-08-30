@@ -1,5 +1,6 @@
 package com.example.QrOrder.service;
 
+import com.example.QrOrder.exceptions.ResourceNotFoundException;
 import com.example.QrOrder.models.MenuItem;
 import com.example.QrOrder.other.QRCodeGenerator;
 import com.example.QrOrder.exceptions.DataAlreadyExistsException;
@@ -26,8 +27,13 @@ public class TableService implements ITableService {
     }
 
     @Override
-    public Optional<Tables> getTableById(Long id) {
-        return tableRepository.findById(id);
+    public Optional<Tables> getTableById(Long id) throws Exception  {
+        Optional<Tables> tablesOptional = tableRepository.findById(id);
+        if (tablesOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Don't exits tables");
+        }
+       // Tables tables = tablesOptional.get();
+        return tablesOptional;
     }
 
     @Override

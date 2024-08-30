@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ITableService {
     List<Tables> getAllTables();
 
-    Optional<Tables> getTableById(Long id);
+    Optional<Tables> getTableById(Long id) throws Exception;
 
     Tables updateTable(Long id, Tables tableDetails);
 

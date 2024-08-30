@@ -36,12 +36,6 @@ public class Tables{
         updatedAt = Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime();
     }
 
-//    @PrePersist
-//    protected void onCreate() {
-//        createdAt = LocalDateTime.now();
-//    }
-
-
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();

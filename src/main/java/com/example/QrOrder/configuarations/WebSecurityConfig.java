@@ -5,6 +5,7 @@ import com.example.QrOrder.models.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.util.Pair;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,8 +27,8 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> {
                     requests.requestMatchers(
-                                    String.format("qr_order/v1/user/**"),
-                                    String.format("qr_order/v1/api/orders/**")
+                                    String.format("qr_order/v1/user/**")
+                                  //  String.format("c")
                             )
                             .permitAll()
 
@@ -39,7 +40,14 @@ public class WebSecurityConfig {
                             .requestMatchers(GET, String.format("qr_order/v1/api/qr-code/**")).permitAll()
                             .requestMatchers(DELETE, String.format("qr_order/v1/api/qr-code/**")).hasRole(Role.ADMIN)
                             .requestMatchers(POST, String.format("qr_order/v1/api/qr-code/generate/**")).hasRole(Role.ADMIN)
-                            .anyRequest().authenticated();
+
+                            .requestMatchers(POST, String.format("qr_order/v1/api/orders")).permitAll()
+                            .requestMatchers(PUT, String.format("qr_order/v1/api/orders/**")).permitAll()
+                            .requestMatchers(GET, String.format("qr_order/v1/api/orders/**")).permitAll()
+                            .requestMatchers(GET, String.format("qr_order/v1/api/orders/status?status=RECEIVED")).permitAll()
+
+
+                            .anyRequest().permitAll();
 
                 });
         return http.build();
