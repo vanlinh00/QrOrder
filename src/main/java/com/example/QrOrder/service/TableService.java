@@ -66,7 +66,7 @@ public class TableService implements ITableService {
                 .qrCode(qrCodeBase64)
                 .build();
         tableRepository.save(table);
-        return qrCodeUrl;
+        return qrCodeBase64;
     }
 
 }

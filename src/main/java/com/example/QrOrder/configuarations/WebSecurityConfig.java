@@ -47,7 +47,7 @@ public class WebSecurityConfig {
                             .requestMatchers(GET, String.format("qr_order/v1/api/orders/status?status=RECEIVED")).permitAll()
 
 
-                            .anyRequest().permitAll();
+                            .anyRequest().authenticated();
 
                 });
         return http.build();

@@ -27,6 +27,7 @@ public class OrderController {
     private final MenuItemService menuItemService;
     private final TableService tableService;
     private SimpMessagingTemplate messagingTemplate;
+    private NotificationController notificationController;
 
     @PostMapping
     public ResponseEntity<String> createOrder(@RequestBody OrderDTO orderDTO) throws Exception {
@@ -52,6 +53,7 @@ public class OrderController {
             return orderItem;
         }).toList();
         orderService.createOrder(order, orderItems);
+        notificationController.sendOrderNotification();  // Gửi thông báo
         return ResponseEntity.ok("Order created successfully");
     }
 
